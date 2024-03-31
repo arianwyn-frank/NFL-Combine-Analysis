@@ -1,0 +1,94 @@
+
+version: 2
+
+sources:
+  - name: combinedatamastercsv
+    description: "The table contains football combine results for participants from 2000 to 2023"
+    database: raw
+    schema: public
+    tags: 
+      - talent_data
+
+  - name: fantasypprmastercsv
+    description: "The table contains fantasy football points statistics for football players starting in 1920s"
+    database: raw
+    schema: public
+    tags: 
+     - talent_data
+
+exposures:
+
+  - name: correlation_fantasypoints_combine
+    type: dashboard
+    
+    owner:
+      name: Harrison Keyser
+      email: h.c.keyser@wustl.edu
+
+  - name: correlation_combine_careerspan
+    type: analysis
+
+    owner:
+      name: Harrison Keyser
+      email: h.c.keyser@wustl.edu
+
+  - name: extract.py
+    type: analysis
+
+    # depends_on : 
+    #   - ref ("combinedatamastercsv.csv")
+    #   - ref ("fantasypprmastercsv.csv")
+
+    owner: 
+      name: Harrison Keyser
+      email: h.c.keyser@wustl.edu
+
+
+  - name: load.py
+    type: dashboard
+
+    # depends_on:
+    #   - ref ("combined_data_cleaned.csv")
+    #   - ref ("fantasy_data_cleaned.csv")
+    
+    owner:
+      name: Harrison Keyser
+      email: h.c.keyser@wustl.edu
+
+  - name: behave.py
+    type: dashboard
+    
+    owner:
+      name: Jinfeng Chen
+      email: c.jinfeng@wustl.edu
+      
+  - name: transform.py
+    type: dashboard
+
+    
+    owner:
+      name: Ari Frank, Meriam Moujahed
+      email: a.g.frank@wustl.edu, m.meriam@wustl.edu
+    
+
+
+
+
+models:
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: my_second_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
